@@ -1,6 +1,6 @@
 Title: Announcing SLMenu
 SubTitle: SLMenu - A powershell text ui library
-Published: 2016-04-03
+Published: 2016-04-16
 ----
 I am happy to announce the open sourcing of a project I have been using at work
 in one form or another for the last few years, [SLMenu](https://github.com/SteveLowe/SLMenu).
