@@ -1,0 +1,114 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  overflow-y: scroll;
+}
+a {
+  color: #5060a0;
+  text-decoration: none;
+}
+a:hover {
+  color: #5060d0;
+  text-decoration: underline;
+}
+nav.header {
+  background-color: #606060;
+  color: white;
+}
+nav.header div:first-child {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 0.5em;
+}
+nav.header div:first-child a {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+main div.container {
+  width: 1000px;
+  margin: 0 auto;
+}
+main div.container article code {
+  font-family: "Source Code Pro", "Roboto Mono", Consolas, monospace;
+  border: 1px solid silver;
+  border-radius: 2px;
+  background-color: #f0f0f0;
+  padding: 0.4em;
+  margin: 0 0.4em;
+  display: inline-block;
+}
+main div.container h2 {
+  margin: 0.4em 0 0 0;
+}
+main div.container h3 {
+  margin: 0;
+  font-weight: lighter;
+  font-size: 1.1em;
+}
+main div.container h4.postedOn {
+  color: #606060;
+  margin: 0 0 1em 0;
+  font-weight: normal;
+  font-size: 0.8em;
+  font-style: italic;
+}
+main hr {
+  color: silver;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  margin: 2em 0;
+}
+main div.blog h1 {
+  margin: 0.4em 0 0 0;
+}
+main div.blog h2 {
+  margin: 0;
+  font-weight: lighter;
+  font-size: 1.1em;
+}
+main div.blog h4.posted {
+  color: #606060;
+  margin: 0 0 1em 0;
+  font-weight: normal;
+}
+footer {
+  border-top: 1px solid silver;
+  margin-top: 2em;
+  padding-top: 1em;
+  padding-bottom: 2em;
+  color: #606060;
+}
+footer div.container {
+  width: 1000px;
+  margin: 0 auto;
+}
+footer div.container a {
+  font-size: 0.75em;
+  margin: 0 5px;
+}
+footer div.container a img {
+  vertical-align: middle;
+}
+footer div.container a.link {
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+footer div.container a.feed {
+  background-image: url("/images/feed-icon-14x14.png");
+  padding-left: 18px;
+}
+footer div.container a.github {
+  background-image: url("/images/GitHub-Mark-16px.png");
+  padding-left: 20px;
+}
+div.right {
+  float: right;
+}
+.clear {
+  clear: both;
+}
