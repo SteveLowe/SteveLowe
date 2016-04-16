@@ -1,0 +1,140 @@
+// vars
+@headerColor: #606060;
+
+@linkColor: #5060a0;
+@linkHovorColor: #5060d0;
+
+
+@main-dark: #606060;
+@main-light: #c0c0c0;
+@main-vlight: #f0f0f0;
+@page-width: 1000px;
+
+// csss
+html, body {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	overflow-y: scroll;
+}
+
+a {
+	color: @linkColor;
+	text-decoration: none;
+}
+a:hover {
+	color: @linkHovorColor;
+	text-decoration: underline;
+}
+
+nav.header {
+	background-color: @headerColor;
+	color: white;
+	div:first-child {
+		width: @page-width;
+		margin: 0 auto;
+		padding: 0.5em;
+		a {
+			color: white;
+			font-weight: bold;
+			font-size: 1.5em;
+		}
+	}
+}
+
+main {
+	div.container {
+		width: @page-width;
+		margin: 0 auto;
+
+		article {
+			code {
+				font-family: "Source Code Pro", "Roboto Mono", Consolas, monospace;
+				border: 1px solid @main-light;
+				border-radius: 2px;
+				background-color: @main-vlight;
+				padding: 0.4em;
+				margin: 0 0.4em;
+				display: inline-block;
+			}
+		}
+		h2 {
+			margin: 0.4em 0 0 0;
+		}
+		h3 {
+			margin: 0;
+			font-weight: lighter;
+			font-size: 1.1em;
+		}
+		h4.postedOn {
+			color: @main-dark;
+			margin: 0 0 1em 0;
+			font-weight: normal;
+			font-size: 0.8em;
+			font-style: italic;
+		}
+	}
+	hr {
+		color: @main-light;
+		border-style: solid;
+		border-width: 1px 0 0 0;
+		margin: 2em 0;
+	}
+	div.blog {
+		h1 {
+			margin: 0.4em 0 0 0;
+		}
+		h2 {
+			margin: 0;
+			font-weight: lighter;
+			font-size: 1.1em;
+		}
+		h4.posted {
+			color: @main-dark;
+			margin: 0 0 1em 0;
+			font-weight: normal;
+		}
+	}
+}
+
+footer {
+	border-top: 1px solid @main-light;
+	margin-top: 2em;
+	padding-top: 1em;
+	padding-bottom: 2em;
+	color: @main-dark;
+
+	div.container {
+		width: @page-width;
+		margin: 0 auto;
+
+		a {
+			font-size: 0.75em;
+			margin: 0 5px;
+			img {
+				vertical-align: middle;
+			}
+		}
+		a.link {
+			background-position: left center;
+			background-repeat: no-repeat;
+		}
+		a.feed {
+			background-image: url("/images/feed-icon-14x14.png");
+			padding-left: 18px;
+		}
+		a.github {
+			background-image: url("/images/GitHub-Mark-16px.png");
+			padding-left: 20px;
+		}
+	}
+}
+
+div.right {
+	float: right;
+}
+.clear {
+	clear: both;
+}

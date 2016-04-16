@@ -1,0 +1,40 @@
+WriteFileName: blog/feed.rss
+---
+@using System.ServiceModel.Syndication;
+@using System.IO;
+@using System.Xml;
+@using AngleSharp;
+@using AngleSharp.Parser.Html;
+@{
+    Layout = string.Empty;
+
+    Uri baseUri = new Uri(@"https://stevelowe.eu");  // This is the root URL to your site
+    SyndicationFeed feed = new SyndicationFeed()
+    {
+        Title = new TextSyndicationContent("Steve Lowe"),  // This should be the name of your site or feed
+        Description = new TextSyndicationContent("Latest blog posts by Steve Lowe"),  // This is a short description of your site or feed
+        BaseUri = baseUri,
+        Items = Documents
+            .Where(x => x.ContainsKey("Published"))  // This should be the metadata field you use for storing item dates (make sure to replace it everywhere)
+            .OrderByDescending(x => x.Get<DateTime>("Published"))
+            .Take(10)  // This is the number of recent items you want in your feed
+            .Select(x => {
+                Uri uri = new Uri(baseUri, "/" + PathHelper.RemoveExtension(x.String("RelativeFilePath")));  // This is the URL for the feed item
+                SyndicationItem item = new SyndicationItem(
+                    x.String("Title") + (x.ContainsKey("Lead") ? " - " + x.String("Lead") : string.Empty),  // This is the title of the feed item
+                     x.String("PostContent"),
+                    uri, uri.ToString(), x.Get<DateTime>("Published"))
+                {
+                    PublishDate = x.Get<DateTime>("Published")
+                };
+
+                item.Authors.Add(new SyndicationPerson("", "Steve Lowe", ""));  // These are the authors for your feed item
+                return item;
+            })
+    };
+    feed.Links.Add(new SyndicationLink(feed.BaseUri));
+    using (XmlTextWriter writer = new XmlTextWriter(Output))
+    {
+        new Rss20FeedFormatter(feed).WriteTo(writer);
+    }
+}

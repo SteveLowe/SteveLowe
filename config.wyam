@@ -1,0 +1,46 @@
+// Setup code
+
+===
+// Configuration code
+
+Pipelines.Add("Blog",
+	ReadFiles("blog\\*.md"),
+	FrontMatter(Yaml()),
+	Markdown(),
+	Concat(
+		ReadFiles("blog\\*.cshtml")
+			.Where(x => Path.GetFileName(x)[0] != '_'),
+		FrontMatter(Yaml())
+	),
+	Razor(),
+	Excerpt("article > p")
+		.SetMetadataKey("PostContent"),
+	WriteFiles(".html")
+);
+
+Pipelines.Add("Content",
+	ReadFiles("*.md")
+		.Where(x => !Path.GetDirectoryName(x).EndsWith("\\blog")),
+	FrontMatter(Yaml()),
+	Markdown(),
+	Concat(
+		ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'
+			&& (!Path.GetDirectoryName(x).EndsWith("\\blog") || Path.GetFileName(x) == "index.cshtml")),
+		FrontMatter(Yaml())
+	),
+	Razor(),
+	WriteFiles(".html")
+);
+
+Pipelines.Add("Less",
+    ReadFiles("Styles//*.less"),
+    Less(),
+    WriteFiles(".css")
+);
+
+Pipelines.Add("Resources",
+	CopyFiles("Scripts//*.min.js"),
+	CopyFiles("images//*.png"),
+	CopyFiles("blog//images//*.png"),
+	CopyFiles("blog//images//*.gif")
+);

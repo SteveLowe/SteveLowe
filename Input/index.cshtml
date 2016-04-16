@@ -1,0 +1,35 @@
+Title: Recent Posts
+---
+@{
+    bool first = true;
+}
+<header>
+    <h2>Recent Posts</h2>
+</header>
+<hr>
+@foreach (IDocument post in Documents
+        .Where(x => x.String("RelativeFileDir").StartsWith("blog"))
+        .OrderByDescending(x => x.Get<DateTime>("Published"))
+        .Take(5))
+{
+    string url = "/" + PathHelper.RemoveExtension(post.String("RelativeFilePath")).Replace('\\', '/');
+    string title = post.String("Title");
+    string subTitle = post.String("SubTitle");
+    string content = post.String("PostContent");
+
+    <article>
+        <a href="@url">
+            <h2>@title</h2>
+            @if(!String.IsNullOrEmpty(subTitle)) {
+                <h3>@subTitle</h3>
+            }
+        </a>
+        <h4 class="postedOn">Posted on @(post.Get<DateTime>("Published").ToLongDateString())</h4>
+        @Html.Raw(content)
+    </article>
+    if (first)
+    {
+        first = false;
+        <hr>
+    }
+}
