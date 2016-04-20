@@ -4,12 +4,11 @@
 // Configuration code
 
 Pipelines.Add("Blog",
-	ReadFiles("blog\\*.md"),
+	ReadFiles("blog/*.md"),
 	FrontMatter(Yaml()),
 	Markdown(),
 	Concat(
-		ReadFiles("blog\\*.cshtml")
-			.Where(x => Path.GetFileName(x)[0] != '_'),
+		ReadFiles("blog/{!_,}*.cshtml"),
 		FrontMatter(Yaml())
 	),
 	Razor(),
@@ -19,13 +18,11 @@ Pipelines.Add("Blog",
 );
 
 Pipelines.Add("Content",
-	ReadFiles("*.md")
-		.Where(x => !Path.GetDirectoryName(x).EndsWith("\\blog")),
+	ReadFiles("{!blog,**}/*.md"),
 	FrontMatter(Yaml()),
 	Markdown(),
 	Concat(
-		ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'
-			&& (!Path.GetDirectoryName(x).EndsWith("\\blog") || Path.GetFileName(x) == "index.cshtml")),
+		ReadFiles("{!blog,**}/{!_,}*.cshtml"),
 		FrontMatter(Yaml())
 	),
 	Razor(),
@@ -33,14 +30,12 @@ Pipelines.Add("Content",
 );
 
 Pipelines.Add("Less",
-    ReadFiles("Styles//*.less"),
+    ReadFiles("Styles/*.less"),
     Less(),
     WriteFiles(".css")
 );
 
 Pipelines.Add("Resources",
-	CopyFiles("Scripts//*.min.js"),
-	CopyFiles("images//*.png"),
-	CopyFiles("blog//images//*.png"),
-	CopyFiles("blog//images//*.gif")
+	CopyFiles("**/images/*.png"),
+	CopyFiles("**/images/*.gif")
 );

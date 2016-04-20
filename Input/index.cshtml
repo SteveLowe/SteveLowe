@@ -12,7 +12,7 @@ Title:
         .OrderByDescending(x => x.Get<DateTime>("Published"))
         .Take(5))
 {
-    string url = "/" + PathHelper.RemoveExtension(post.String("RelativeFilePath")).Replace('\\', '/');
+    string url = Context.GetLink(post);//"/" + PathHelper.RemoveExtension(post.String("RelativeFilePath")).Replace('\\', '/');
     string title = post.String("Title");
     string subTitle = post.String("SubTitle");
     string content = post.String("PostContent");

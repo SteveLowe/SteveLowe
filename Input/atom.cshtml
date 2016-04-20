@@ -19,7 +19,7 @@ WriteFileName: blog/feed.atom
             .OrderByDescending(x => x.Get<DateTime>("Published"))
             .Take(10)  // This is the number of recent items you want in your feed
             .Select(x => {
-                Uri uri = new Uri(baseUri, "/" + PathHelper.RemoveExtension(x.String("RelativeFilePath")));  // This is the URL for the feed item
+                Uri uri = new Uri(baseUri, "/" + Context.GetLink(x));  // This is the URL for the feed item
                 SyndicationItem item = new SyndicationItem(
                     x.String("Title") + (x.ContainsKey("Lead") ? " - " + x.String("Lead") : string.Empty),  // This is the title of the feed item
                      x.String("PostContent"),
